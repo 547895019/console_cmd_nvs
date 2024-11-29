@@ -131,17 +131,7 @@ static nvs_type_t nvs_key_str2type(char* str)
         return NVS_TYPE_ANY;
     }
 }
-static int nvs_write_vaule(const char *part_name, const char* name, const char* key,nvs_type_t type,const char* value)
-{
-    nvs_handle handle;
-    esp_err_t ret;
-    ret = nvs_open_from_partition(part_name, name, NVS_READONLY, &handle);
 
-    if (ret != ESP_OK) {
-        printf("nvs open %s failed with %x\r\n", name, ret);
-        return -1;
-    }
-}
 
 static int nvs_printf_vaule(const char *part_name, const char* name, const char* key,nvs_entry_info_t info)
 {
