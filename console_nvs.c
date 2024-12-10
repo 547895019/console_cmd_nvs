@@ -64,6 +64,12 @@ static int nvs_key_type2str(nvs_type_t type,char* out_value, size_t* length)
         if(length)
             *length = strlen("U32");
         break;
+    case NVS_TYPE_I32:
+        if(out_value)
+            strcpy(out_value,"I32");
+        if(length)
+            *length = strlen("I32");
+        break;
     case NVS_TYPE_U64:
         strcpy(out_value,"U64");
         if(length)
