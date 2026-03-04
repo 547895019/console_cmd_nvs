@@ -422,7 +422,7 @@ static int nvs_delete_command(int argc, char **argv)
     nvs_handle handle;
     esp_err_t ret;
 
-    if (argc != 4) {
+    if (argc != 3 && argc != 4) {
         printf("nvs_delete nvs iotkit-kv stassid\r\n");
         return -1;
     }
@@ -432,10 +432,18 @@ static int nvs_delete_command(int argc, char **argv)
         printf("nvs open %s failed with %x\r\n", argv[2], ret);
         return -1;
     }
-    ret = nvs_erase_key(handle, argv[3]);
-    if (ret != ESP_OK) {
-        printf("nvs delete %s failed with %x\r\n", argv[3], ret);
-    }
+	if (argc == 4){
+		ret = nvs_erase_key(handle, argv[3]);
+		if (ret != ESP_OK) {
+			printf("nvs delete %s failed with %x\r\n", argv[3], ret);
+		}
+	}else if (argc == 3){
+		ret = nvs_erase_all(handle);
+		if (ret != ESP_OK) {
+			printf("nvs delete all failed with %x\r\n", ret);
+		}
+	}
+
     nvs_close(handle);
     return 0;
 }
